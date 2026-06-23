@@ -26,5 +26,7 @@ This converts Seconds (s), Minutes (min), and Hours (h).
 This converts Meters per Second (m/s), Kilometers per Hour (km/h), Miles per Hour (mph), and Knot.
 
 # HOW TO USE
-* Install the latest Python from Python offical website.
-* 
+* Install the latest Python from [Python offical website](https://www.python.org/downloads/).
+* Clone this repository
+* Open your terminal and run this command `py main.py`
+* Voila!!! You can start using the calculator converter.
