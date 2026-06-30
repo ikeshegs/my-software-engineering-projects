@@ -40,7 +40,10 @@
 # for i in range(1, 21):
 #     print(f"{number} x {i} = {number * i}")
 
-# 
-foods = ["Egusi", "Fried Rice", "Akara", "Moi Moi"]
-for i in range(len(foods)):
-    print(f"I like {foods[i]}.")
+# Loop through a list of your favorite foods and print: "I like <food>" for each one.
+# foods = ["Egusi", "Fried Rice", "Akara", "Moi Moi"]
+# for i in range(len(foods)):
+#     print(f"I like {foods[i]}.")
+
+for counter in reversed(range(1, 11)):
+    print(counter)
