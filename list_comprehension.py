@@ -92,4 +92,7 @@ list_str = [" Ikechukwu", "Ezinne ", " Uche ", "  Dan"]
 cleaned_str = [s.strip() for s in list_str]
 print(cleaned_str) # Output: ['Ikechukwu', 'Ezinne', 'Uche', 'Dan']
 
-#
+# Convert a list of temperatures from Celsius to Fahrenheit.
+temp = [32, 45, 67, 89, 90, 100]
+converted_temp = [(c * 9/5) + 32 for c in temp]
+print(converted_temp)
