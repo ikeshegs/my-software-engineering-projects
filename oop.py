@@ -168,7 +168,26 @@ account = BankAccount("Alice", 1000)
 account.deposit(500)   #  Works: Deposited $500. New balance: $1500
 account.deposit(-50)   # ❌ Prevented: Invalid deposit amount!
 
-print(account.get_balance())  # Output: 1500
+# print(account.get_balance())  # Output: 1500
+
+# Using @property Decorator that lets you use getters and setters while still using clean dot notation
+class Product:
+    def __init__(self, price):
+        self.__price = price
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, value):
+        if value >= 0:
+            self.__price = value
+
+item = Product(100)
+print(item.price)  # Output: 100
+item.price = 150
+print(item.price)  # Output: 150
 
 
 
