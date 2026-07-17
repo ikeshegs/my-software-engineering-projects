@@ -80,61 +80,49 @@ motorcycle = Motorcycle()
 # print(motorcycle.start())
 
 # Build a ShoppingCart class that allows adding, removing, and listing items, and calculating the total price.
-class ShoppingCart:
-    # shopping_list = []
-    
-    def __init__(self, shopping_list: list):
-        self.__shopping_list = shopping_list
+class ShoppingCart:   
+    def __init__(self, name):
+        self.name = name
+        self.__shopping_lists = []
         
-    def add_item(self, item: str, quantity: int, price: float):
-        # self.item = item
-        # self.quantity = quantity
-        # self.price = price
-        
-        self.__shopping_list.append({
-            "name": item,
-            "quantity": quantity,
-            "price": price
-        })
+    def add_cart_item(self, cart_item):
+        self.__shopping_lists.append(cart_item)
         
     def list_cart_items(self):
-        return self.__shopping_list
+        return [f"{cart_item.name} - {cart_item.quantity} - {cart_item.price}" for cart_item in self.__shopping_lists]
     
     def remove_item(self, item_index: int):
-        # self.item_index = item_index
-        
-        # if self.item_index < len(self.__shopping_list):
-        #     for item in self.__shopping_list:
-        #         if self.item_index == self.__shopping_list.index(item):
-        #             return self.__shopping_list.remove(item)
-        # else:
-        #     raise IndexError("Number is greater than length of the list.")
-        
-        if not 0 <= item_index < len(self.__shopping_list):
+        if not 0 <= item_index < len(self.__shopping_lists):
             raise IndexError("Index out of range")
         
-        self.__shopping_list.pop(item_index)
+        self.__shopping_lists.pop(item_index)
         
     def calculate_total(self):
-        total = 0
-        
-        # for item in self.__shopping_list:
-        #     for key, value in item.items():
-        #         if key == "total item price":
-        #             total += value
-        
-        # for item in self.__shopping_list:
-        #     total += item["total item price"]
-        
-        # return total
-        return sum((item["price"] * item["quantity"]) for item in self.__shopping_list)
+        return sum((item.price * item.quantity) for item in self.__shopping_lists)
     
-shoppingcart = ShoppingCart([])
+    def shopping_cart_length(self):
+        return len(self.__shopping_lists)
 
-shoppingcart.add_item("PS5", 1, 3500)
-shoppingcart.add_item("iPhone 17 Pro Max", 4, 1500)
-shoppingcart.add_item("MacBook Pro Max M5 2026", 2, 4500)
+class CartItem:
+    def __init__(self, name, quantity, price):
+        self.name = name
+        self.quantity = quantity
+        self.price = price
+
+shoppingcart = ShoppingCart("Iyke's Shopping Lists")
+
+cart_item1 = CartItem("PS5", 1, 3500)
+cart_item2 = CartItem("iPhone 17 Pro Max", 4, 1500)
+cart_item3 = CartItem("MacBook Pro Max M5 2026", 2, 4500)
+cart_item4 = CartItem("iPad M4 Pro 11'", 3, 2500)
+
+shoppingcart.add_cart_item(cart_item1)
+shoppingcart.add_cart_item(cart_item2)
+shoppingcart.add_cart_item(cart_item3)
+shoppingcart.add_cart_item(cart_item4)
+
+print(shoppingcart.name)
 
 print(shoppingcart.remove_item(2))
 print(shoppingcart.list_cart_items())
-print(shoppingcart.calculate_total())
+print(f"The sum total of your cart of {shoppingcart.shopping_cart_length()} items is: ${shoppingcart.calculate_total():.2f}")
