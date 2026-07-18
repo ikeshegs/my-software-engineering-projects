@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 class BankAccount:      # class
 
     bank_name = "ABC Bank"          # class attribute
@@ -83,31 +85,44 @@ motorcycle = Motorcycle()
 class ShoppingCart:   
     def __init__(self, name):
         self.name = name
-        self.__shopping_lists = []
+        self.__shopping_list = []
         
     def add_cart_item(self, cart_item):
-        self.__shopping_lists.append(cart_item)
+        self.__shopping_list.append(cart_item)
         
     def list_cart_items(self):
-        return [f"{cart_item.name} - {cart_item.quantity} - {cart_item.price}" for cart_item in self.__shopping_lists]
+        # return [f"{cart_item.name} - {cart_item.quantity} - {cart_item.price}" for cart_item in self.__shopping_list]
+        return [str(item) for item in self.__shopping_list]
     
     def remove_item(self, item_index: int):
-        if not 0 <= item_index < len(self.__shopping_lists):
+        if not 0 <= item_index < len(self.__shopping_list):
             raise IndexError("Index out of range")
         
-        self.__shopping_lists.pop(item_index)
+        self.__shopping_list.pop(item_index)
         
     def calculate_total(self):
-        return sum((item.price * item.quantity) for item in self.__shopping_lists)
+        return sum(item.subtotal() for item in self.__shopping_list)
     
-    def shopping_cart_length(self):
-        return len(self.__shopping_lists)
+    def __len__(self):
+        return len(self.__shopping_list)
 
 class CartItem:
     def __init__(self, name, quantity, price):
+        if quantity <= 0:
+            raise ValueError("Quantity must be positive")
+
+        if price < 0:
+            raise ValueError("Price cannot be negative")
+        
         self.name = name
         self.quantity = quantity
         self.price = price
+        
+    def __str__(self):
+        return f"{self.name} | Qty: {self.quantity} | ${self.price:.2f}"
+    
+    def subtotal(self):
+        return self.price * self.quantity
 
 shoppingcart = ShoppingCart("Iyke's Shopping Lists")
 
@@ -123,6 +138,21 @@ shoppingcart.add_cart_item(cart_item4)
 
 print(shoppingcart.name)
 
-print(shoppingcart.remove_item(2))
+shoppingcart.remove_item(2)
 print(shoppingcart.list_cart_items())
-print(f"The sum total of your cart of {shoppingcart.shopping_cart_length()} items is: ${shoppingcart.calculate_total():.2f}")
+print(f"The sum total of your cart of {len(shoppingcart)} items is: ${shoppingcart.calculate_total():.2f}")
+
+# Create an abstract Employee class with an abstract calculate_salary() method, then implement FullTimeEmployee and PartTimeEmployee.
+class Employee(ABC):
+    def __init__(self):
+        pass
+    
+    @abstractmethod
+    def calculate_salary(self):
+        pass
+    
+class FullTimeEmployee(Employee):
+    pass
+
+class PartTimeEmployee(Employee):
+    pass
