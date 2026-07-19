@@ -139,20 +139,49 @@ shoppingcart.add_cart_item(cart_item4)
 print(shoppingcart.name)
 
 shoppingcart.remove_item(2)
-print(shoppingcart.list_cart_items())
-print(f"The sum total of your cart of {len(shoppingcart)} items is: ${shoppingcart.calculate_total():.2f}")
+# print(shoppingcart.list_cart_items())
+# print(f"The sum total of your cart of {len(shoppingcart)} items is: ${shoppingcart.calculate_total():.2f}")
 
 # Create an abstract Employee class with an abstract calculate_salary() method, then implement FullTimeEmployee and PartTimeEmployee.
 class Employee(ABC):
-    def __init__(self):
-        pass
+    def __init__(self, name: str):
+        self.name = name
     
     @abstractmethod
     def calculate_salary(self):
-        pass
-    
+        """Return the employee's salary."""
+
 class FullTimeEmployee(Employee):
-    pass
+    def __init__(self, name: str, monthly_salary: float):
+        super().__init__(name)
+        self.monthly_salary = monthly_salary
+    
+    def calculate_salary(self):
+        return self.monthly_salary
 
 class PartTimeEmployee(Employee):
-    pass
+    def __init__(self, name, hourly_rate: float, hours_worked: int):
+        super().__init__(name)
+        self.hourly_rate = hourly_rate
+        self.hours_worked = hours_worked
+        
+    def calculate_salary(self):
+        return self.hourly_rate * self.hours_worked
+    
+employee1 = PartTimeEmployee("Ike", 15, 12)
+employee2 = FullTimeEmployee("Chiome", 2500)
+
+print(employee1.calculate_salary())
+print(employee2.calculate_salary())
+
+# Polymorphism - employee.calculate_salary() works for every object, even though each class calculates salary differently. That's polymorphism.
+employees = [
+    FullTimeEmployee("Alice", 5000),
+    PartTimeEmployee("Bob", 25, 80),
+    FullTimeEmployee("John", 6500)
+]
+
+for employee in employees:
+    print(
+        f"{employee.name}: ${employee.calculate_salary():,.2f}"
+    )
