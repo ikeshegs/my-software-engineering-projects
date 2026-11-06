@@ -1,0 +1,16 @@
+Task started
+Performing some task...
+Task completion in progress
+Task completed successfully.
+Task ended
+Task started
+Performing some task...
+Task completion in progress
+Task completed successfully.
+Task ended
+
+Task started
+Performing some task...
+Task completion in progress
+Task completed successfully.
+Task ended
