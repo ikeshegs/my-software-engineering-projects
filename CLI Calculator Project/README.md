@@ -1,4 +1,4 @@
-# This is my first of many projects in my software engineering study plan.
+# This is my first project in my software engineering study plan.
 
 This is a CLI calculator converter built with Python.
 
